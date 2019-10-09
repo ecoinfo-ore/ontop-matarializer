@@ -47,26 +47,27 @@ public class Main_1_18 {
            
             switch ( token ) {
                 
-              case "-owl"              : owlFile         = args[i+1]  ;
+              case "-owl"              : owlFile         = args[i+1]   ;
                                          break ;
-              case "-obda"             : obdaFile        = args[i+1]  ;
+              case "-obda"             : obdaFile        = args[i+1]   ;
                                          break ;
-              case "-out"              : outFile         = args[i+1]  ;
+              case "-out"              : outFile         = args[i+1]   ;
                                          break ;
-              case "-ttl"              : turtleOutFormat = true       ;
+              case "-ttl"              : turtleOutFormat = true        ;
                                          break ;
-              case "-q"                : sparqlQuery     = args[i+1]  ;
-                                         existQuery      = true       ;
+              case "-q"                : sparqlQuery     = 
+                                         removeDoubleQuotes(args[i+1]) ;
+                                         existQuery      = true        ;
                                          break ;                   
-              case "-not_out_ontology" : not_out_onto    = true       ;
+              case "-not_out_ontology" : not_out_onto    = true        ;
                                          break ;                   
-              case "-out_ontology"     : out_onto        = true       ;
+              case "-out_ontology"     : out_onto        = true        ;
                                          break ;                   
-              case "-merge"            : merge           = true       ;
+              case "-merge"            : merge           = true        ;
                                          break ;
-              case "-batch"            : batch           = true       ;  
+              case "-batch"            : batch           = true        ;  
                                          break ;
-              case "-debug"            : debug = true                 ;
+              case "-debug"            : debug = true                  ;
                                          break ;
               case "-pageSize"         : pageSize        = 
                                          validate ( Integer.parseInt ( args[i+1] ) ) ;
@@ -145,7 +146,7 @@ public class Main_1_18 {
         
         System.out.println(" ")                                                  ;
         long executionTime = System.currentTimeMillis() - startTime              ;
-        System.out.println( " Elapsed seconds : " + executionTime / 1000 +" s" ) ; 
+        System.out.println( " Elapsed seconds : " + executionTime / 1000 +" s" ) ;
         System.out.println( " " )                                                ;
                    
     }
@@ -190,4 +191,14 @@ public class Main_1_18 {
                      .collect ( Collectors.toList() ) ;
     }
     
+    private static String removeDoubleQuotes( String str ) {
+        
+      if ( str.trim().startsWith("\"") &&
+          str.trim().endsWith("\""))  {
+          return str.substring( 1, str.length() - 1 )      ;
+      }
+       
+      return str ;
+    }
+
 }
